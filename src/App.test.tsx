@@ -45,3 +45,17 @@ it('When the - button is pressed, the counter changes to -1', () => {
   // 카운터가 0에서 -1 되어 1이 됩니다.
   expect(counterElement).toHaveTextContent('-1');
 });
+
+it('on/off button has blue color', () => {
+  render(<App />);
+  const buttonElement = screen.getByTestId('on/off-button');
+  expect(buttonElement).toHaveStyle({ backgroundColor: 'blue' });
+});
+
+it('Prevent the -, + button from being pressed when the on/off button is clicked', () => {
+  render(<App />);
+  const onOffButtonElement = screen.getByTestId('on/off-button');
+  fireEvent.click(onOffButtonElement);
+  const plusButtonElement = screen.getByTestId('plus-button');
+  expect(plusButtonElement).toBeDisabled();
+});
