@@ -1,46 +1,34 @@
-# Getting Started with Create React App
+## ESLint Testing Plugins 설치
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+eslint에서 기본적으로 제공하지 않는 다양한 규칙을 플러그인을 통해 관리할 수 있습니다.
+예를 들어서 react에 관련된 린트 설정을 위해서는
 
-## Available Scripts
+- eslint-plugin-react
+  를 사용하면 되며, react hooks에 관련된 규칙을 적용시켜주려면
+- eslint-plugin-hooks
+  를 사용하면 됩니다.
 
-In the project directory, you can run:
+설치해야할 플러그인
 
-### `yarn start`
+```
+yarn add -D eslint-plugin-testing-library eslint-plugin-jest-dom
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+testing-library: render로 DOM을 그리는 부분
+jest-dom: expect-matcher로 테스트
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+설치를 했다면, 내부 설정
 
-### `yarn test`
+```
+{
+  "plugins": ["testing-library", "jest-dom"], // 넣어주고
+  "extends": [ // 사용하는 부분
+    "react-app",
+    "react-app/jest",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
+  ]
+} // 규칙을 변경하고자 한다면 rules를 통해 가능
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+그런데 올바른 매쳐 적용은 안됨.. ? 내가 맘대로 조작해서 그런듯 함
