@@ -48,3 +48,23 @@ jest-dom: expect-matcher로 테스트
 
 유저가 발생시키는 액션(이벤트)에 대한 테스트를 해야하는 경우 사용
 https://testing-library.com/docs/dom-testing-library/api-events/
+
+---
+
+# Query 사용 우선 순위
+
+https://testing-library.com/docs/queries/about/#priority
+
+너의 테스트가 닮아야한다. 유저가 컴포넌트가 상호작영하는지
+
+1. 모든 사람이 접근 가능한 쿼리를 사용해야한다.
+
+- 쿼리인데, 시각적으로나 마우스를 ㅏㅅ용하느느 경험하는 사람 뿐만 아니라, 보조기구를 사용하는 사람들에 경험도 반영
+- getByRole (https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)
+- 롤과 name속성값을 통해 얻어온다.
+
+2. getByLabelText
+
+3. ...
+
+우리는 getByRole만 사용할 것
