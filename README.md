@@ -68,3 +68,13 @@ https://testing-library.com/docs/queries/about/#priority
 3. ...
 
 우리는 getByRole만 사용할 것
+
+---
+
+## FireEvent, UserEvent
+
+UserEvent 사용이 더 좋다 왜?
+
+- FireEvent를 개선해서 만든 것
+- 내부코드를 보면, fireEvent를 사용하면서 내부 엘러먼트 타입에 따라 더욱 적절한 반응을 보여준다.
+- 게다가 userEvent를 사용하면, 버튼을 눌렀을 떄 focus되는 반응처럼 더 사용자와 적합한 경험을 테스트할 수 있게 합니다.
