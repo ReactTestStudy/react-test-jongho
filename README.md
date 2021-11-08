@@ -112,3 +112,7 @@ UserEvent 사용이 더 좋다 왜?
 ### afterAll
 
 - 테스트가 끝나면 서버를 닫는 것
+
+# lint가 잘 안먹히는 오류 있는듯
+
+await, async나 더 정확한 matcher를 추천해주지 않음

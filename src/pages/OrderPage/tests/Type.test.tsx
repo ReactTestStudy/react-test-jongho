@@ -30,3 +30,11 @@ it('when fetching product datas, face on error', async () => {
     expect(errorBanner).toHaveTextContent('에러가 발생했습니다.'),
   );
 });
+
+it('fetch optoin information from server', async () => {
+  render(<Type orderType="options" />);
+
+  const optionCheckboxes = await screen.findAllByRole('checkbox');
+
+  await waitFor(() => expect(optionCheckboxes).toHaveLength(2));
+});

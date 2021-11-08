@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Products from './Products';
 import ErrorBanner from '../../components/ErrorBanner';
+import Options from './Options';
 
 type Props = {
   orderType: string;
@@ -33,7 +34,7 @@ const Type = ({ orderType }: Props) => {
     };
   }, [loadItems]);
 
-  const ItemComponents = orderType === 'products' ? Products : null;
+  const ItemComponents = orderType === 'products' ? Products : Options;
 
   const optionItems = items.map((item) => (
     <ItemComponents
