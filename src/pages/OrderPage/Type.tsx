@@ -8,8 +8,13 @@ type Props = {
   orderType: string;
 };
 
+type ItemType = {
+  name: string;
+  imagePath: string;
+};
+
 const Type = ({ orderType }: Props) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<ItemType[]>([]);
   const [error, setError] = useState(false);
 
   const loadItems = async (orderType: string, isMounted: boolean) => {
