@@ -37,7 +37,7 @@ const Type = ({ orderType }: Props) => {
     return () => {
       isMounted = false;
     };
-  }, [loadItems]);
+  }, []);
 
   const ItemComponents = orderType === 'products' ? Products : Options;
 
