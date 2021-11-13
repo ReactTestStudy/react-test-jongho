@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Products from './Products';
 import ErrorBanner from '../../components/ErrorBanner';
@@ -16,26 +16,26 @@ type ItemType = {
 const Type = ({ orderType }: Props) => {
   const [items, setItems] = useState<ItemType[]>([]);
   const [error, setError] = useState(false);
+  const isMountedRef = useRef(true); // memory leak을 해결하기 위한 방법, https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
 
-  const loadItems = async (orderType: string, isMounted: boolean) => {
+  const loadItems = useCallback(async (orderType: string) => {
     try {
       let response = await axios.get(`http://localhost:5000/${orderType}`);
-      if (isMounted) {
+      if (isMountedRef.current) {
         setItems(response.data);
       }
     } catch (error) {
-      if (isMounted) {
+      if (isMountedRef.current) {
         setError(true);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
-    let isMounted = true;
-    loadItems(orderType, isMounted);
+    loadItems(orderType);
 
     return () => {
-      isMounted = false;
+      isMountedRef.current = false;
     };
   }, []);
 
