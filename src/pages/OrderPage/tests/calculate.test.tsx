@@ -1,11 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../../test-util';
 import userEvent from '@testing-library/user-event';
 import Type from '../Type';
+import { OrderContextProvider } from '../../../contexts/OrderContext';
 
 it("update product's total when products change", async () => {
   render(<Type orderType="products" />);
 
-  const productsTotal = screen.getByText('상품 총 가격:', { exact: false }); // 뒤에 문자가 더 있어서 가져올 수 있게 한다
+  const productsTotal = screen.getByText('총 가격:', { exact: false }); // 뒤에 문자가 더 있어서 가져올 수 있게 한다
   expect(productsTotal).toHaveTextContent('0');
 
   // 아메리카 여행 상품 한개 올리기

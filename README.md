@@ -125,3 +125,8 @@ input 이나 textarea에 텍스트를 선택(select)한 후 제거(delete)해 �
 하지만 만약 현재 소스 코드 보다 위에서 같은 엘리먼트를 위한
 userEvent를 사용했다면, clear 해준 후에
 userEvent.type()을 사용하는게 좋습니다.
+
+## Custom Render
+
+wrapper 를 모든 test마다 넣우는것을 불필요한 복제이기 때문에,
+이런 방법을 사용할 수 있다.
