@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../../test-util';
 import SummaryPage from '../SummaryPage';
 
 it('checkbox and button', () => {
-  render(<SummaryPage />);
+  render(<SummaryPage setStep={undefined} />);
   const checkbox = screen.getByRole('checkbox', {
     name: '주문하려는 것을 확인하셨나요?',
   }) as HTMLInputElement;
