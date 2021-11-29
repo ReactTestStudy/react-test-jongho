@@ -3,9 +3,14 @@ import React from 'react';
 type Props = {
   name: string;
   imagePath: string;
+  updateItemCounts: (name: string, currentValue: string) => void;
 };
 
-const Products = ({ name, imagePath }: Props) => {
+const Products = ({ name, imagePath, updateItemCounts }: Props) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const currentValue = e.target.value;
+    updateItemCounts(name, currentValue);
+  };
   return (
     <div style={{ textAlign: 'center' }}>
       <img
@@ -14,15 +19,17 @@ const Products = ({ name, imagePath }: Props) => {
         style={{ width: '75%' }}
       />
       <form action="" style={{ marginTop: '10px' }}>
-        <label htmlFor="" style={{ textAlign: 'right' }}>
+        <label htmlFor={name} style={{ textAlign: 'right' }}>
           {name}
         </label>
         <input
+          id={name}
           type="number"
           style={{ marginLeft: 7 }}
           name="quantity"
           min="0"
           defaultValue="0"
+          onChange={handleChange}
         />
       </form>
     </div>
