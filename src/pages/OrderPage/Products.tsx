@@ -3,6 +3,7 @@ import React from 'react';
 type Props = {
   name: string;
   imagePath: string;
+  updateItemCounts: (name: string, currentValue: string) => void;
 };
 
 const Products = ({ name, imagePath, updateItemCounts }: Props) => {

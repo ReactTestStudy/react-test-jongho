@@ -2,6 +2,7 @@ import React from 'react';
 
 type Props = {
   name: string;
+  updateItemCounts: (name: string, checked: number) => void;
 };
 
 const Options = ({ name, updateItemCounts }: Props) => {

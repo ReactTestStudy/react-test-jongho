@@ -11,22 +11,22 @@ import ErrorBanner from '../../components/ErrorBanner';
 import Options from './Options';
 import { OrderContext } from '../../contexts/OrderContext';
 
-type Props = {
-  orderType: string;
-};
+// type Props = {
+//   orderType: string;
+// };
 
-type ItemType = {
-  name: string;
-  imagePath: string;
-};
+// type ItemType = {
+//   name: string;
+//   imagePath: string;
+// };
 
-const Type = ({ orderType }: Props) => {
-  const [items, setItems] = useState<ItemType[]>([]);
+const Type = ({ orderType }) => {
+  const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
   const isMountedRef = useRef(true); // memory leak을 해결하기 위한 방법, https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
   const [orderDatas, updateItemCounts] = useContext(OrderContext);
 
-  const loadItems = useCallback(async (orderType: string) => {
+  const loadItems = useCallback(async (orderType) => {
     try {
       let response = await axios.get(`http://localhost:5000/${orderType}`);
       if (isMountedRef.current) {

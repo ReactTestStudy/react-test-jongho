@@ -1,18 +1,22 @@
 import { createContext, useEffect, useMemo, useState } from 'react';
 
-// type OrderContextType = {
-//   data: ;
-//   update: ;
-// }
+export type OrderType = 'products' | 'options';
+export type OrderCountType = {
+  products: Map<string, number>;
+  options: Map<string, number>;
+};
 
-export const OrderContext = createContext();
+export const OrderContext = createContext({
+  products: 1000,
+  options: 500,
+});
 
 const pricePerItem = {
   products: 1000,
   options: 500,
 };
 
-function calculateSubtotal(orderType, orderCounts) {
+function calculateSubtotal(orderType: OrderType, orderCounts: OrderCountType) {
   let optionCount = 0;
   for (const count of orderCounts[orderType].values()) {
     optionCount += count;
@@ -21,8 +25,8 @@ function calculateSubtotal(orderType, orderCounts) {
   return optionCount * pricePerItem[orderType];
 }
 
-export function OrderContextProvider(props) {
-  const [orderCount, setOrderCount] = useState({
+export function OrderContextProvider(props: any) {
+  const [orderCount, setOrderCount] = useState<OrderCountType>({
     products: new Map(),
     options: new Map(),
   });
@@ -32,6 +36,13 @@ export function OrderContextProvider(props) {
     options: 0,
     total: 0,
   });
+
+  const resetOrderDatas = () => {
+    setOrderCount({
+      products: new Map(),
+      options: new Map(),
+    });
+  };
 
   useEffect(() => {
     const productsTotal = calculateSubtotal('products', orderCount);
@@ -46,7 +57,11 @@ export function OrderContextProvider(props) {
   }, [orderCount]);
 
   const value = useMemo(() => {
-    function updateItemCount(itemName, newItemCount, orderType) {
+    function updateItemCount(
+      itemName: string,
+      newItemCount: string,
+      orderType: OrderType,
+    ) {
       const newOrderCounts = { ...orderCount };
 
       const orderCountsMap = orderCount[orderType];
@@ -54,7 +69,7 @@ export function OrderContextProvider(props) {
 
       setOrderCount(newOrderCounts);
     }
-    return [{ ...orderCount, totals }, updateItemCount];
+    return [{ ...orderCount, totals }, updateItemCount, resetOrderDatas];
   }, [orderCount, totals]);
 
   return <OrderContext.Provider value={value} {...props} />;
